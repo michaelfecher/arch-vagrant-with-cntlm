@@ -3,13 +3,26 @@ Using an Arch Linux VM behind a (corporate) proxy?
 This solution provides an automated way to setup the CNTLM proxy from Windows without PowerShell stuff.
 You only have to adapt the CNTLM template and of course the Vagrant provisioning phase.
 
-**Why should someone do this?**
-Because you like to work with Linux on your working machine, but can not use it natively, because of all the coroprate stuff 
+# Why should someone do this?
+Because you like to work with Linux on your working machine, but can not use it natively, because of all the corporate stuff 
 like Outlook, Office.. (yawn).
 Even also the setup of the CNTLM is very disgusting and is error-proneous.
 If a lot of developers in a department or company want or will have to use Linux in VM, this approach will save a lot of time.
 
+# Prerequisites
+Ok, it's not as pain free as someone has expected.
+Of course you will need some temporary admin rights on Windows or at least someone who can do that for you for installing the following stuff.
+## Git 
+If you don't have access to git, then get yourself a portable version of [https://www.collab.net/downloads/giteye][GitEye].
+The application won't need any admin rights to install.
+Clone this repo.
+## VirtualBox + Guest Extensions
+This one can't be done as a non priviledged user.
+## Vagrant for Windows
+Do not install it your user's home, because it could lead into trouble.
+
 # ToDos / Steps to be taken
+This steps are not implemented yet, but concepted.
 ## Enable Linux commands in Windows
 Integrate 
 [https://frippery.org/busybox/]
