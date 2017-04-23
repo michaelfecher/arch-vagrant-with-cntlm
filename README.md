@@ -13,7 +13,7 @@ If a lot of developers in a department or company want or will have to use Linux
 Ok, it's not as pain free as someone has expected.
 Of course you will need some temporary admin rights on Windows or at least someone who can do that for you for installing the following stuff.
 ## Git 
-If you don't have access to git, then get yourself a portable version of [https://www.collab.net/downloads/giteye][GitEye].
+If you don't have access to git, then get yourself a portable version of [GitEye](https://www.collab.net/downloads/giteye).
 The application won't need any admin rights to install.
 Clone this repo.
 ## VirtualBox + Guest Extensions
@@ -25,7 +25,7 @@ Do not install it your user's home, because it could lead into trouble.
 This steps are not implemented yet, but concepted.
 ## Enable Linux commands in Windows
 Integrate 
-[https://frippery.org/busybox/]
+https://frippery.org/busybox/
 or
 msys2 portable 
 in this repository in order to get grep + sed
