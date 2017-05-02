@@ -48,3 +48,22 @@ And also adapt the `NoProxy`, if you want to bypass local addresses, e.g. intran
 You also have to edit the `Domain` value, because nowadays everyone is using NTLMv2 on Windows.
 
 This step usually needs to be done once, except the proxy, the domain or the company changes.
+
+## Adapt the provisioning files
+Each developer team has other preferences, e.g. firefox vs chrome, intellij-idea vs. eclipse and so on.
+Therefore you have to adapt the `devTools.sh` and `userSpecificStuff.sh` provisioning files especially.
+
+Currently I am using IDEA, openJDK8, maven and firefox.
+Therefore these software packages are installed.
+
+# Run the PowerShell script to setup your VM
+start it via 
+
+    01_setup.ps1
+
+Enter your proxy user and the related password.
+These credentials are also used for generating the Linux user on the VM.
+
+If everything went the happy path, a separate window with the Windows version of CNTLM and another
+one with Vagrant will appear. If there are any failures within this process, make sure you
+put the Windows binaries of CNTLM in the correct folder and used your correct credentials.
