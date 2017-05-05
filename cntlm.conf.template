@@ -1,0 +1,9 @@
+# make sure, that you edit everything except username, passNTLMv2 and the last line.
+Username    USER_NAME
+Domain      YOURDOMAIN
+PassNTLMv2  USER_PASS
+
+Proxy       YOURPROXY.COM:PORT
+NoProxy     192.168.*.*, 127.0.0.*, 10.*.*.*, localhost
+Listen      3128
+# empty line, because cntlm crashes without it

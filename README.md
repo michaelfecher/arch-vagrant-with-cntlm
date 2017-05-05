@@ -12,7 +12,7 @@ Even also the setup of CNTLM is very disgusting and is error-prone.
 If a lot of developers in a department or company want or will have to use Linux in VM, this approach will save a lot of time.
 
 # Prerequisites
-Ok, it's not as pain free as someone has expected.
+Ok, it's not as pain free as someone may expected.
 Of course you will need some temporary admin rights on Windows or at least someone who can do that for you for installing the following stuff.
 ## Git (Optional)
 If you don't have access to git, then get yourself a portable version of [GitEye](https://www.collab.net/downloads/giteye).
@@ -50,20 +50,21 @@ You also have to edit the `Domain` value, because nowadays everyone is using NTL
 This step usually needs to be done once, except the proxy, the domain or the company changes.
 
 ## Adapt the provisioning files
-Each developer team has other preferences, e.g. firefox vs chrome, intellij-idea vs. eclipse and so on.
+Each development team and their individuals have other preferences, e.g. firefox vs chrome, intellij-idea vs. eclipse and so on.
 Therefore you have to adapt the `devTools.sh` and `userSpecificStuff.sh` provisioning files especially.
 
 Currently I am using IDEA, openJDK8, maven and firefox.
 Therefore these software packages are installed.
 
 # Run the PowerShell script to setup your VM
+After you've adapted the `cntlm.conf.template` to your team's needs, you can 
 start it via 
 
     01_setup.ps1
 
-Enter your proxy user and the related password.
+Enter your proxy user and the related password for the concerned user.
 These credentials are also used for generating the Linux user on the VM.
 
-If everything went the happy path, a separate window with the Windows version of CNTLM and another
+If everything went along the happy path, a separate window with the Windows version of CNTLM and another
 one with Vagrant will appear. If there are any failures within this process, make sure you
 put the Windows binaries of CNTLM in the correct folder and used your correct credentials.

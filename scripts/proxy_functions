@@ -1,0 +1,23 @@
+function proxy_on() {
+  # host info
+  export proxy_port=3128
+  export proxy_host=http://localhost
+ 
+  export http_proxy=$proxy_host:$proxy_port
+  export https_proxy=$http_proxy
+  export ftp_proxy=$http_proxy
+  export rsync_proxy=$http_proxy
+  export HTTP_PROXY=$http_proxy
+  export HTTPS_PROXY=$https_proxy
+  export FTP_PROXY=$ftp_proxy
+  export RSYNC_PROXY=$rsync_proxy
+}
+ 
+function proxy_off(){
+    unset http_proxy
+    unset https_proxy
+    unset ftp_proxy
+    unset rsync_proxy
+    echo -e "CNTLM stopped."
+    echo -e "Proxy environment variable removed."
+}
