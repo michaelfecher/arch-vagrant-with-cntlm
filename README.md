@@ -2,18 +2,19 @@
 Using an Arch Linux VM behind a (corporate) proxy? 
 This solution provides an automated way to setup the CNTLM proxy from Windows, based on PowerShell, Vagrant and CNTLM (Windows/Linux).
 You only have to adapt the CNTLM template with general settings and of course the Vagrant provisioning phase.
-The forking of this repo is strictly allowed and necessary, because you want to provide the adapted CNTLM template
+The forking of this repo is _strictly recommended_ and necessary, because you want to provide the adapted CNTLM template
 and the binaries of CNTLM (Windows/Linux) to your users, without downloading it by themselves.
 
 # Why should someone do this?
 Because you like to work with Linux on your work-related machine, but can not use it natively, because of all the corporate stuff 
 like Outlook, Office.. (yawn).
-Even also the setup of CNTLM is very disgusting and is error-prone.
+Even also the setup of CNTLM is very disgusting and error-prone.
 If a lot of developers in a department or company want or will have to use Linux in VM, this approach will save a lot of time.
 
 # Prerequisites
 Ok, it's not as pain free as someone may expected.
 Of course you will need some temporary admin rights on Windows or at least someone who can do that for you for installing the following stuff.
+
 ## Git (Optional)
 If you don't have access to git, then get yourself a portable version of [GitEye](https://www.collab.net/downloads/giteye).
 The application won't need any admin rights to install.
@@ -32,7 +33,7 @@ This is technically no prerequisite, but noteworthy to mention.
 I've built the binary file for Arch Linux and placed it in the `/cntlm-linux/` folder.
 The Arch Linux build of CNTLM will be installed via `pacman -U <cntlm-build>`.
 The build is based upon the latest [CNTLM Linux version](https://sourceforge.net/projects/cntlm/files/cntlm/cntlm%200.92.3/cntlm-0.92.3.tar.gz/download),
-so all credits belong to the owner and writer of CNTLM.
+so all credits belong to the owner and author of CNTLM.
 
 ## VirtualBox + Guest Extensions
 This one can't be done as a non privileged user.
@@ -68,3 +69,13 @@ These credentials are also used for generating the Linux user on the VM.
 If everything went along the happy path, a separate window with the Windows version of CNTLM and another
 one with Vagrant will appear. If there are any failures within this process, make sure you
 put the Windows binaries of CNTLM in the correct folder and used your correct credentials.
+
+After the Vagrant process, you can login in your VM with your entered proxy credentials.
+Enjoy.
+
+# Improvements
+- **Credentials setup**: For user and developer specific access (git, maven, ...) it is necessary to copy
+the settings files to the appropriate place. 
+- **Install Wizard**: For the provisioning stuff, I'd like to add a wizard, which makes it easier to choose, what
+packages are need to be installed by Vagrant. Currently the adaption of the `devTools.sh` and the `userSpecificStuff.sh`
+is necessary for the needs of a developer/a development team.
