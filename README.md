@@ -39,7 +39,7 @@ so all credits belong to the owner and author of CNTLM.
 This one can't be done as a non privileged user.
 
 ## Vagrant for Windows
-Do not install it to your user's home, because it could lead into trouble.
+Do not install it to your user's home, because it could lead into trouble with Vagrant itself, e.g. the batch file can not start the `vagrant up` process.
 
 # Before you start
 ## Proxy / NoProxy in cntlm.conf.template
