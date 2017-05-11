@@ -4,7 +4,7 @@ echo "##########################################################################
 echo " BASIC LINUX USER STUFF (creation, permissions..)"
 echo "################################################################################"
 # creating user, ZSH as shell is already installed by vagrant box image
-sudo useradd -m -g wheel -G storage,power -s /usr/bin/zsh $VM_USER
+sudo useradd -m -g wheel -G video,audio,input,power,storage,optical,lp,scanner,vboxsf -s /usr/bin/zsh $VM_USER
 # changes the password according to the given env variables of the host
 sudo echo $VM_USER:$VM_PASS | sudo chpasswd
 # put the user to the sudoers.d dir - but with password prompt if privileged command needs that
@@ -34,17 +34,17 @@ echo "##########################################################################
 sudo mv /tmp/setup/pacman.conf /etc/pacman.conf
 
 # update the certificates, otherwise all the following pacman updates will fail
-sudo pacman -Sy --noconfirm archlinux-keyring 
+sudo pacman -Sy --noconfirm archlinux-keyring 1>/dev/null
 
 # remove the old cert utils and reinstall the new one
-sudo pacman -Rdd --noconfirm ca-certificates-utils
-sudo pacman -S --noconfirm ca-certificates-utils
+sudo pacman -Rdd --noconfirm ca-certificates-utils 1>/dev/null
+sudo pacman -S --noconfirm ca-certificates-utils 1>/dev/null
 
 # system update
-sudo pacman -Su --noconfirm
+sudo pacman -Su --noconfirm 1>/dev/null
 
-# installing timezone relevant packages and yaourt AUR
-sudo pacman -S --noconfirm nfs-utils ntp yaourt
+# installing timezone relevant packages
+sudo pacman -S --noconfirm nfs-utils ntp 1>/dev/null 
 sudo systemctl enable ntpd
 sudo hwclock --systohc --utc
 
@@ -52,11 +52,11 @@ echo "##########################################################################
 echo "# SYSTEM - GUI (Tiling Manager, Login Manager, ...) "
 echo "################################################################################"
 # preparations for GUI
-sudo pacman -S --noconfirm xorg-server xorg-server-utils xorg-xinit xorg-twm xterm lightdm-gtk-greeter accountsservice
-sudo pacman -S --noconfirm i3-wm i3status dmenu
+sudo pacman -S --noconfirm xorg-server xorg-server-utils xorg-xinit xorg-twm xterm lightdm-gtk-greeter accountsservice 1>/dev/null
+sudo pacman -S --noconfirm i3-wm i3status dmenu 1>/dev/null
 
 # terminal + nicer font
-sudo pacman -S --noconfirm ttf-dejavu rxvt-unicode xclip
+sudo pacman -S --noconfirm ttf-dejavu rxvt-unicode 1>/dev/null
 	
 # move the x-related files to their appropriate place
 mv /tmp/setup/.Xresources /home/$VM_USER/
@@ -70,5 +70,7 @@ mv /tmp/setup/X11/xorg.conf.d/20-keyboard.conf /etc/X11/xorg.conf.d/20-keyboard.
 # change ownership of the copied files to the $VM_USER
 sudo chown -R $VM_USER:wheel /home/$VM_USER
 
+# remove the default.target link, otherwise lightdm won't startup automatically
+sudo rm /etc/systemd/system/default.target
 sudo systemctl enable lightdm.service
 sudo systemctl start lightdm.service
