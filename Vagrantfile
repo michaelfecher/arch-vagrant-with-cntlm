@@ -13,7 +13,10 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "terrywang/archlinux"
-
+  config.vm.hostname = "localhost"
+  config.vm.post_up_message = "call `proxy_on` to activate the proxy on shell, `proxy_off` deactivates the proxy. 
+  other scripts can be found in /etc/scripts. after logging in, you will see the basic starter (black) screen of i3.
+  the basic command to start a shell on i3 is [win]+[enter], [win]+[D] starts the launcher menu for installed applications."
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
