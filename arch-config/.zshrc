@@ -86,5 +86,4 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias xclipc="xclip -selection c"
-source /etc/proxy_functions
-
+source /etc/scripts/proxy_functions /etc/scripts/fix_zsh_hist

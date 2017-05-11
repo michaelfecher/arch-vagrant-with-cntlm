@@ -1,0 +1,2 @@
+#!/bin/bash
+VBoxClient-all

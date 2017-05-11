@@ -3,7 +3,7 @@
 echo "################################################################################"
 echo " Java specific stuff (JDK, some enhancements, maven)"
 echo "################################################################################"
-sudo pacman -S --noconfirm jdk8-openjdk maven
+sudo pacman -S --noconfirm jdk8-openjdk maven 1>/dev/null
 
 sudo grep "_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'" /etc/environment
 if [ $? -eq 1 ]; then
@@ -11,4 +11,4 @@ if [ $? -eq 1 ]; then
   echo "_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'" | sudo tee -a /etc/environment
 fi
 
-sudo yum -S --noconfirm intellij-idea-ue-bundled-jre
+sudo yaourt -S --noconfirm intellij-idea-ue-bundled-jre 1>/dev/null

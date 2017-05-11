@@ -1,11 +1,8 @@
 #!/bin/bash
-sudo pacman -U --noconfirm /tmp/setup/cntlm-0.92.3-4-x86_64.pkg.tar.xz
+sudo pacman -U --noconfirm /tmp/setup/cntlm-0.92.3-4-x86_64.pkg.tar.xz 1>/dev/null
 sudo mv /tmp/setup/cntlm.conf /etc/cntlm.conf
 sudo systemctl enable cntlm.service
 sudo systemctl start cntlm.service
-
-sudo mv /tmp/setup/proxy_functions /etc/proxy_functions
-sudo chmod a+x /etc/proxy_functions
 
 # keep env variables + proxy stuff when sudo'ing - needed for provisioning
 #

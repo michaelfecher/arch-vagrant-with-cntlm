@@ -18,20 +18,25 @@ sudo ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 sudo rm -f /etc/sudoers.d/terry
 sudo userdel -rf terry
 
+# update the config/scripts permissions
+sudo chown -R $VM_USER:wheel /tmp/
+sudo mv /tmp/setup/scripts /etc/scripts
+sudo chmod -R a+x /etc/scripts
+
 echo "################################################################################"
 echo "ZSH STUFF"
 echo "################################################################################"
 # clone the ZSH repo in the user dir
 git clone https://github.com/robbyrussell/oh-my-zsh.git /home/$VM_USER/.oh-my-zsh
 # replace ZSH env path with the current user path ... currently its located in line 2
-sed -i "2s/VM_USER/$VM_USER/" /tmp/setup/.zshrc
-mv /tmp/setup/.zshrc /home/$VM_USER/
+sed -i "2s/VM_USER/$VM_USER/" /tmp/setup/arch-config/.zshrc
+mv /tmp/setup/arch-config/.zshrc /home/$VM_USER/
 
 echo "################################################################################"
 echo "# SYSTEM - PACKAGE MANAGER and NTP/UTC Time"
 echo "################################################################################"
 # apply user repo stuff to pacman 
-sudo mv /tmp/setup/pacman.conf /etc/pacman.conf
+sudo mv /tmp/setup/arch-config/pacman.conf /etc/pacman.conf
 
 # update the certificates, otherwise all the following pacman updates will fail
 sudo pacman -Sy --noconfirm archlinux-keyring 1>/dev/null
@@ -52,23 +57,28 @@ echo "##########################################################################
 echo "# SYSTEM - GUI (Tiling Manager, Login Manager, ...) "
 echo "################################################################################"
 # preparations for GUI
-sudo pacman -S --noconfirm xorg-server xorg-server-utils xorg-xinit xorg-twm xterm lightdm-gtk-greeter accountsservice 1>/dev/null
+sudo pacman -S --noconfirm xorg-server xorg-xinit xorg-twm xterm lightdm lightdm-gtk-greeter accountsservice 1>/dev/null
 sudo pacman -S --noconfirm i3-wm i3status dmenu 1>/dev/null
 
-# terminal + nicer font
-sudo pacman -S --noconfirm ttf-dejavu rxvt-unicode 1>/dev/null
+# terminal + nicer font + copy+paste for terminal
+sudo pacman -S --noconfirm ttf-dejavu rxvt-unicode xclip 1>/dev/null
+mv /etc/scripts/clipboard /usr/lib/urxvt/perl/
 	
 # move the x-related files to their appropriate place
-mv /tmp/setup/.Xresources /home/$VM_USER/
-mv /tmp/setup/.xinitrc /home/$VM_USER/
-
+mv /tmp/setup/arch-config/.Xresources /home/$VM_USER/
+mv /tmp/setup/arch-config/.xinitrc /home/$VM_USER/
+	
 # i3 tiling manager stuff
-mkdir --parents /home/$VM_USER/.config/i3/; mv /tmp/setup/.config/i3/config $_
-mv /tmp/setup/X11/xorg.conf.d/20-keyboard.conf /etc/X11/xorg.conf.d/20-keyboard.conf
+mkdir --parents /home/$VM_USER/.config/i3/; mv /tmp/setup/arch-config/config $_
+mv /tmp/setup/arch-config/20-keyboard.conf /etc/X11/xorg.conf.d/20-keyboard.conf
 
 
 # change ownership of the copied files to the $VM_USER
-sudo chown -R $VM_USER:wheel /home/$VM_USER
+sudo chown -R $VM_USER /home/$VM_USER
+sudo chown -R $VM_USER:vboxsf /media
+mv /tmp/setup/arch-config/vboxclientall.sh /etc/profile.d/
+
+sudo chown -R $VM_USER /etc/environment
 
 # remove the default.target link, otherwise lightdm won't startup automatically
 sudo rm /etc/systemd/system/default.target

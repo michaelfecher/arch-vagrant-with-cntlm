@@ -73,9 +73,16 @@ put the Windows binaries of CNTLM in the correct folder and used your correct cr
 After the Vagrant process, you can login in your VM with your entered proxy credentials.
 Enjoy.
 
+# Enabling/Disabling proxy in a shell
+There is a script in the `/etc/scripts` folder, which sets or unsets the environment variables.
+Unfortunately in Firefox the proxy needs to be entered manually.
+
+Use `proxy_on` to set the proxy on the current shell and `proxy_off` to disable it.
+
 # Improvements
 - **Credentials setup**: For user and developer specific access (git, maven, ...) it is necessary to copy
 the settings files to the appropriate place. 
 - **Install Wizard**: For the provisioning stuff, I'd like to add a wizard, which makes it easier to choose, what
 packages are need to be installed by Vagrant. Currently the adaption of the `devTools.sh` and the `userSpecificStuff.sh`
 is necessary for the needs of a developer/a development team.
+- **Automated Proxy in Firefox**: The process needs to be done manually at the moment. I tried to copy the `prefs.js`, but that needs some more experimentation.

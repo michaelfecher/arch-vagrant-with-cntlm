@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.56.99"
+  # config.vm.network "private_network", ip: "192.168.56.99"
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.
@@ -43,10 +43,12 @@ Vagrant.configure("2") do |config|
   # Example for VirtualBox:
   #
    config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
+     # Display the VirtualBox GUI when booting the machine
      vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
+     vb.cpus = 4
+     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+     vb.customize ["modifyvm", :id, "--draganddrop", "hosttoguest"]
+     # Customize the amount of memory on the VM:
      vb.memory = "8096"
    end
   #
@@ -63,6 +65,10 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
+    # set the shared folder of host (1st argument) + guest (2nd argument)
+  config.vm.synced_folder "C:/vm_shared", "/media/sf_vm_shared", create: true,
+	group: "wheel",
+	mount_options: ["dmode=775,fmode=664"]
   
   # copy CNTLM stuff to VM 
   # the cntlm snapshot can be found here: https://aur.archlinux.org/packages/cntlm/
@@ -73,49 +79,28 @@ Vagrant.configure("2") do |config|
     file.source = "cntlm-linux/cntlm-0.92.3-4-x86_64.pkg.tar.xz"
     file.destination = "/tmp/setup/cntlm-0.92.3-4-x86_64.pkg.tar.xz"
   end
-   
-  config.vm.provision :file do |file|
-    file.source = "arch-config/.Xresources"
-    file.destination = "/tmp/setup/.Xresources"
-  end
-  
-  # proxy functions for enabling/disabling proxy in linux
-  config.vm.provision :file do |file|
-    file.source = "scripts/proxy_functions"
-    file.destination = "/tmp/setup/proxy_functions"
-  end
-   
-  config.vm.provision :file do |file|
-    file.source = "arch-config/.xinitrc"
-    file.destination = "/tmp/setup/.xinitrc"
-  end
-  
-  config.vm.provision :file do |file|
-    file.source = "arch-config/.zshrc"
-    file.destination = "/tmp/setup/.zshrc"
-  end
-  
-  # i3 window manager config
-  config.vm.provision :file do |file|
-    file.source = "arch-config/config"
-    file.destination = "/tmp/setup/.config/i3/config"
-  end
-  
-  config.vm.provision :file do |file|
-    file.source = "arch-config/20-keyboard.conf"
-    file.destination = "/tmp/setup/X11/xorg.conf.d/20-keyboard.conf"
-  end 
   
   # proxy settings
   config.vm.provision :file do |file|
     file.source = "cntlm.conf"
     file.destination = "/tmp/setup/cntlm.conf"
   end   
-  
-  # pacman with user repo settings
+
+  # useful scripts / functions for use in the linux terminal
   config.vm.provision :file do |file|
-    file.source = "arch-config/pacman.conf"
-    file.destination = "/tmp/setup/pacman.conf"
+    file.source = "scripts"
+    file.destination = "/tmp/setup/scripts"
+  end
+  
+  config.vm.provision :file do |file|
+    file.source = "arch-config"
+    file.destination = "/tmp/setup"
+  end
+  
+  # copy credentials
+  config.vm.provision :file do |file|
+    file.source = "credentials-files"
+    file.destination = "/tmp/setup/credentials-files"
   end  
 
   config.vm.provision "shell", path: "installProxy.sh"
