@@ -11,4 +11,4 @@ if [ $? -eq 1 ]; then
   echo "_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'" | sudo tee -a /etc/environment
 fi
 
-sudo yaourt -S --noconfirm intellij-idea-ue-bundled-jre 1>/dev/null
+yaourt -S --noconfirm intellij-idea-community-edition 1>/dev/null
