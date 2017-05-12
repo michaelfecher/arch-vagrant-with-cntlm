@@ -37,6 +37,7 @@ $arguments_cntlm = "-c "".\cntlm.conf"" -v"
 Start-Process -FilePath ".\cntlm-win\cntlm.exe" -ArgumentList $arguments_cntlm
 ##
 ## START VAGRANT - THE MAGIC HAPPENS IN THE VAGRANTFILE AFTER THIS STEP
+## output of the vagrant process will be logged to a textfile, because the window closes after the process.
 ##
-Start-Process -FilePath "vagrant" -ArgumentList "up" -LoadUserProfile
+Start-Process -FilePath "vagrant" -ArgumentList "up" -LoadUserProfile -RedirectStandardOutput "vagrant_output.txt"
 
