@@ -75,9 +75,26 @@ Enjoy.
 
 # Enabling/Disabling proxy in a shell
 There is a script in the `/etc/scripts` folder, which sets or unsets the environment variables.
-Unfortunately in Firefox the proxy needs to be entered manually.
-
 Use `proxy_on` to set the proxy on the current shell and `proxy_off` to disable it.
+The proxy is enabled by default on the terminal sessions, see `.zshrc`.
+
+# FAQs
+Below you will find some answers to common questions, especially when you are new to Arch Linux or this repo.
+## How do I start a terminal?
+After you have logged in you can start via [Win]+[Enter] a new terminal.
+This keyset is based upon [i3](https://i3wm.org/docs/refcard.html), so with a high chance some other questions will be answered though.
+## What kind of desktop environment is installed?
+As mentioned before, it is based on [i3](https://i3wm.org/), which provides a very clean way of organizing windows and applications.
+This keyset for shortcuts can be found [here](https://i3wm.org/docs/refcard.html).
+## Is there something like a "taskbar" or quickstart menu?
+Yes, of course! It's called `dmenu`. You can start it with [Windows]+[d]. 
+Then you enter your application name and there you go.
+## How is copy+paste working? CTRL+c/v don't do the job in a terminal window...
+There are two types of clipboards in Linux basically. For convenience a.k.a using only one clipboard, there is a perl function, which is loaded in the `rxvt` terminal configuration.
+So basically the shortcut in terminal windows is [CTRL]+[SHIFT]+[C] to copy and [CTRL]+[SHIFT]+[V] to paste.
+
+If you want to copy something from a GUI to the terminal, it works nearly the same except for the copy part.
+In most of the times, you can use [CTRL]+c to copy something from e.g. Firefox.
 
 # Improvements
 - **Credentials setup**: For user and developer specific access (git, maven, ...) it is necessary to copy
