@@ -87,3 +87,5 @@ source $ZSH/oh-my-zsh.sh
 
 alias xclipc="xclip -selection c"
 source /etc/scripts/proxy_functions /etc/scripts/fix_zsh_hist
+# turn the proxy on by default
+proxy_on 
