@@ -1,4 +1,5 @@
-# make sure, that you edit everything except username, passNTLMv2 and the last line.
+# make sure, that you edit everything EXCEPT!! username, passNTLMv2 and the last line.
+# the template will be used as foundation for the new cntlm.conf file for Windows and Arch Linux.
 Username    USER_NAME
 Domain      YOURDOMAIN
 PassNTLMv2  USER_PASS
