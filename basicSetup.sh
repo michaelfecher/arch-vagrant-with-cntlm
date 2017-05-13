@@ -31,6 +31,7 @@ git clone https://github.com/robbyrussell/oh-my-zsh.git /home/$VM_USER/.oh-my-zs
 # replace ZSH env path with the current user path ... currently its located in line 2
 sed -i "2s/VM_USER/$VM_USER/" /tmp/setup/arch-config/.zshrc
 mv /tmp/setup/arch-config/.zshrc /home/$VM_USER/
+mv /tmp/setup/arch-config/.zshenv /home/$VM_USER/
 
 echo "################################################################################"
 echo "# SYSTEM - PACKAGE MANAGER and NTP/UTC Time"
